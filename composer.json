@@ -1,0 +1,15 @@
+{
+    "name": "drupal/palcera_theme",
+    "type": "drupal-theme",
+    "description": "Base theme for Palcera CMS templates. Generated from Mercury, provides breakpoints, image styles, and core SDC components.",
+    "conflict": {
+        "drupal/experience_builder": "*"
+    },
+    "require": {
+        "drupal/cva": "^1"
+    },
+    "require-dev": {
+        "drupal/canvas": "^1"
+    },
+    "license": "GPL-2.0-or-later"
+}

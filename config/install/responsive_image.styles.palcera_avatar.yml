@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.palcera_1x1_64w
+    - image.style.palcera_1x1_128w
+  theme:
+    - palcera_theme
+id: palcera_avatar
+label: 'Palcera Avatar'
+image_style_mappings:
+  - breakpoint_id: palcera_theme.xxl
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_64w
+  - breakpoint_id: palcera_theme.xxl
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_128w
+  - breakpoint_id: palcera_theme.xl
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_64w
+  - breakpoint_id: palcera_theme.xl
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_128w
+  - breakpoint_id: palcera_theme.lg
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_64w
+  - breakpoint_id: palcera_theme.lg
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_128w
+  - breakpoint_id: palcera_theme.md
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_64w
+  - breakpoint_id: palcera_theme.md
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_128w
+  - breakpoint_id: palcera_theme.sm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_64w
+  - breakpoint_id: palcera_theme.sm
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_128w
+  - breakpoint_id: palcera_theme.xs
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_64w
+  - breakpoint_id: palcera_theme.xs
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_1x1_128w
+breakpoint_group: palcera_theme
+fallback_image_style: palcera_1x1_64w

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: palcera_1x1_64w
+label: 'Palcera 1:1 - 64w'
+effects:
+  palcera_1x1_64w_crop:
+    uuid: palcera_1x1_64w_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 64
+      height: 64
+      crop_type: focal_point
+  palcera_1x1_64w_webp:
+    uuid: palcera_1x1_64w_webp
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

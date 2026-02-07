@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: palcera_16x9_1024w
+label: 'Palcera 16:9 - 1024w'
+effects:
+  palcera_16x9_1024w_crop:
+    uuid: palcera_16x9_1024w_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1024
+      height: 576
+      crop_type: focal_point
+  palcera_16x9_1024w_webp:
+    uuid: palcera_16x9_1024w_webp
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

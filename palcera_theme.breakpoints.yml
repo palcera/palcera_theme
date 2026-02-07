@@ -1,0 +1,53 @@
+palcera_theme.xs:
+  label: 'Extra Small'
+  mediaQuery: '(max-width: 575px)'
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+  group: palcera_theme
+
+palcera_theme.sm:
+  label: 'Small'
+  mediaQuery: '(min-width: 576px) and (max-width: 767px)'
+  weight: 1
+  multipliers:
+    - 1x
+    - 2x
+  group: palcera_theme
+
+palcera_theme.md:
+  label: 'Medium'
+  mediaQuery: '(min-width: 768px) and (max-width: 991px)'
+  weight: 2
+  multipliers:
+    - 1x
+    - 2x
+  group: palcera_theme
+
+palcera_theme.lg:
+  label: 'Large'
+  mediaQuery: '(min-width: 992px) and (max-width: 1199px)'
+  weight: 3
+  multipliers:
+    - 1x
+    - 2x
+  group: palcera_theme
+
+palcera_theme.xl:
+  label: 'Extra Large'
+  mediaQuery: '(min-width: 1200px) and (max-width: 1399px)'
+  weight: 4
+  multipliers:
+    - 1x
+    - 2x
+  group: palcera_theme
+
+palcera_theme.xxl:
+  label: 'Extra Extra Large'
+  mediaQuery: '(min-width: 1400px)'
+  weight: 5
+  multipliers:
+    - 1x
+    - 2x
+  group: palcera_theme

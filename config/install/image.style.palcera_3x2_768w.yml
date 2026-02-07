@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: palcera_3x2_768w
+label: 'Palcera 3:2 - 768w'
+effects:
+  palcera_3x2_768w_crop:
+    uuid: palcera_3x2_768w_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 512
+      crop_type: focal_point
+  palcera_3x2_768w_webp:
+    uuid: palcera_3x2_768w_webp
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

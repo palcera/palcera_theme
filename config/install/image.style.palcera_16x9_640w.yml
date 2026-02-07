@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: palcera_16x9_640w
+label: 'Palcera 16:9 - 640w'
+effects:
+  palcera_16x9_640w_crop:
+    uuid: palcera_16x9_640w_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 640
+      height: 360
+      crop_type: focal_point
+  palcera_16x9_640w_webp:
+    uuid: palcera_16x9_640w_webp
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

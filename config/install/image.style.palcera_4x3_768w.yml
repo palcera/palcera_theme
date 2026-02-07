@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: palcera_4x3_768w
+label: 'Palcera 4:3 - 768w'
+effects:
+  palcera_4x3_768w_crop:
+    uuid: palcera_4x3_768w_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 576
+      crop_type: focal_point
+  palcera_4x3_768w_webp:
+    uuid: palcera_4x3_768w_webp
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

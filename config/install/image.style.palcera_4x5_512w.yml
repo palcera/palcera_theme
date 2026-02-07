@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: palcera_4x5_512w
+label: 'Palcera 4:5 - 512w'
+effects:
+  palcera_4x5_512w_crop:
+    uuid: palcera_4x5_512w_crop
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 512
+      height: 640
+      crop_type: focal_point
+  palcera_4x5_512w_webp:
+    uuid: palcera_4x5_512w_webp
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

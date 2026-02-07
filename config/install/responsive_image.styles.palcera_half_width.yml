@@ -1,0 +1,65 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.palcera_3x2_512w
+    - image.style.palcera_3x2_640w
+    - image.style.palcera_3x2_768w
+    - image.style.palcera_3x2_1024w
+    - image.style.palcera_3x2_1200w
+    - image.style.palcera_3x2_1400w
+  theme:
+    - palcera_theme
+id: palcera_half_width
+label: 'Palcera Half Width'
+image_style_mappings:
+  - breakpoint_id: palcera_theme.xxl
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_640w
+  - breakpoint_id: palcera_theme.xxl
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_1200w
+  - breakpoint_id: palcera_theme.xl
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_640w
+  - breakpoint_id: palcera_theme.xl
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_1200w
+  - breakpoint_id: palcera_theme.lg
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_512w
+  - breakpoint_id: palcera_theme.lg
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_1024w
+  - breakpoint_id: palcera_theme.md
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_768w
+  - breakpoint_id: palcera_theme.md
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_1400w
+  - breakpoint_id: palcera_theme.sm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_768w
+  - breakpoint_id: palcera_theme.sm
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_1400w
+  - breakpoint_id: palcera_theme.xs
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_768w
+  - breakpoint_id: palcera_theme.xs
+    multiplier: 2x
+    image_mapping_type: image_style
+    image_mapping: palcera_3x2_1400w
+breakpoint_group: palcera_theme
+fallback_image_style: palcera_3x2_640w
