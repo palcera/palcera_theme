@@ -1,5 +1,5 @@
 {
-    "name": "drupal/palcera_theme",
+    "name": "palcera/palcera_theme",
     "type": "drupal-theme",
     "description": "Base theme for Palcera CMS templates. Generated from Mercury, provides breakpoints, image styles, and core SDC components.",
     "conflict": {
