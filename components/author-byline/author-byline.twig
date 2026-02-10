@@ -1,0 +1,20 @@
+{% if name is not empty %}
+  <div class="author-byline flex items-center gap-4 border-t border-border pt-6 mt-8">
+    {% if media.src is defined %}
+      <div class="author-byline--avatar h-12 w-12 shrink-0 overflow-hidden rounded-full [&_img]:h-full [&_img]:w-full [&_img]:object-cover">
+        {% include 'canvas:image' ignore missing with {
+          src: media.src,
+          alt: media.alt|default(name),
+          width: media.width,
+          height: media.height,
+        } only %}
+      </div>
+    {% endif %}
+    <div class="author-byline--info flex flex-col">
+      <span class="font-semibold">{{ name }}</span>
+      {% if job_title is not empty %}
+        <span class="text-sm text-muted-foreground">{{ job_title }}</span>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}

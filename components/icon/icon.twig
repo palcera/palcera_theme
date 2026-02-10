@@ -17,6 +17,7 @@
 } %}
 
 {% set resolved_size = size_map[icon_size]|default(size_map['small']) %}
+{% set icon = icon starts with 'phosphor:' ? icon[9:] : icon %}
 
 <div class="min-w:{{ resolved_size }}">
   {{

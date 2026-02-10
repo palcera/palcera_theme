@@ -1,0 +1,28 @@
+"$schema": "https://git.drupalcode.org/project/drupal/-/raw/10.1.x/core/modules/sdc/src/metadata.schema.json"
+name: Author byline
+description: Compact author card with avatar, name, and job title.
+group: Content
+props:
+  type: object
+  properties:
+    name:
+      type: string
+      title: Name
+      examples:
+        - "Elena Martinez"
+
+    job_title:
+      type: string
+      title: Job title
+      examples:
+        - "Senior Partner"
+
+    media:
+      $ref: json-schema-definitions://canvas.module/image
+      title: Photo
+      type: object
+      examples:
+        - src: "assets/placeholder.jpg"
+          alt: "Author photo"
+          width: 96
+          height: 96

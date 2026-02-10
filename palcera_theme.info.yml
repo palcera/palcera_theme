@@ -3,7 +3,7 @@ type: theme
 'base theme': false
 libraries:
   - palcera_theme/global
-logo: logo-dark.svg
+logo: logo-light.svg
 description: 'Base theme for Palcera CMS templates.'
 core_version_requirement: ^11
 generator: 'mercury:1.0.0'

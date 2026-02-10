@@ -99,6 +99,11 @@
     @apply bg-background font-normal text-foreground antialiased;
   }
 
+  .region-header,
+  .region-footer {
+    @apply bg-background text-foreground;
+  }
+
   p {
     @apply mb-4;
   }
@@ -320,7 +325,7 @@
 
   /* Set a fixed width on the main content container. */
   .region-content {
-    @apply container mx-auto px-4 pb-8;
+    @apply container mx-auto px-4;
   }
 
   /* Add a utility class for full-width elements. */
