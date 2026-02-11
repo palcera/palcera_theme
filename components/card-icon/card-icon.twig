@@ -85,7 +85,7 @@
   })
 %}
 
-<div class="{{ tile_classes }}">
+<article class="{{ tile_classes }}">
   <div class="flex h-full flex-col justify-center">
     <div class="{{ icon_container_classes }}">
       {% if icon %}
@@ -94,7 +94,8 @@
             '@palcera_theme/components/icon/icon.twig',
             {
               icon: icon,
-              icon_size: icon_size_map[icon_size]|default('medium')
+              icon_size: icon_size_map[icon_size]|default('medium'),
+              alt: text|default('')
             },
             with_context: false
           )
@@ -126,4 +127,4 @@
       {% endif %}
     </div>
   </div>
-</div>
+</article>

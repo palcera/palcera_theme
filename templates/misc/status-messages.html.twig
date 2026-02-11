@@ -42,7 +42,7 @@
     <div
       class="message-item flex flex-row items-start gap-2 rounded-md p-4 shadow-lg transition-all duration-300 ease-out {{ type_class }}"
       data-message-item
-      role="contentinfo"
+      role="{{ type == 'error' or type == 'warning' ? 'alert' : 'status' }}"
       aria-label="{{ status_headings[type] }}"
     >
       <div class="message-header flex shrink-0">
