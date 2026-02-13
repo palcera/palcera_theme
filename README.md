@@ -1,149 +1,120 @@
-# PalceraTheme Theme
+# Palcera Theme
 
-PalceraTheme is a component-based Drupal theme, providing a modern and flexible starting point for site owners to build scalable and efficient websites using [Drupal Canvas](/project/canvas).
+A component-based Drupal theme for [Palcera CMS](https://github.com/palcera/palcera_cms), built on [Drupal Canvas](https://www.drupal.org/project/canvas) with Tailwind CSS.
 
 ## Getting started
 
-To use PalceraTheme, you can install it via Composer, like any other Drupal theme. But PalceraTheme is designed to be copied, rather than used as a contributed theme or base theme, and you should not assume that future updates will be compatible with your site.
+Palcera Theme is installed automatically when you use the Palcera Base site template. It can also be installed via Composer:
 
-To create the clone to use for your site, use Drupal core's starter kit tool:
+```shell
+composer require palcera/palcera_theme
+```
+
+### Don't sub-theme Palcera Theme
+
+Palcera Theme does not provide backward compatibility guarantees between releases. If you need to customize beyond fonts and colors, use Drupal's starter kit tool to create your own copy:
 
 ```shell
 cd drupal/web
-php core/scripts/drupal generate-theme my_theme --name="My Custom Theme" --description="A customized version of PalceraTheme." --starterkit=palcera_theme
+php core/scripts/drupal generate-theme my_theme --name="My Custom Theme" --starterkit=palcera_theme
 ```
 
-This will create a copy of PalceraTheme called `my_theme`, and place it in `themes/my_theme`. This theme is yours, and you can customize it in any way you see fit!
+This creates an independent copy at `themes/my_theme` that you fully control. You can then remove the original:
 
-To install it in Drupal, either visit the `/admin/appearance` page, or run `drush theme:enable my_theme` at the command line.
-
-You can then remove the contributed version via Composer with `composer remove drupal/palcera_theme`.
-
-### Sub-theming
-
-**Don't create your custom theme as a sub-theme of PalceraTheme.** PalceraTheme is meant to be used as a starter kit, and does not provide backward compatibility. This allows us to rapidly innovate, iterate, and improve. If you create a sub-theme of PalceraTheme, it is likely to break in the future.
+```shell
+composer remove palcera/palcera_theme
+```
 
 ## Customizing
 
-### Fonts & colors
+There are three levels of customization, from simplest to most flexible:
 
-To change the fonts or colors in `my_theme`, edit the `theme.css` file. Changes to `theme.css` do not require a CSS rebuild, but you may need to clear the cache.
+### 1. Fonts & colors (no build required)
 
-### Custom components
+Edit `theme.css` in your theme directory. This file controls CSS custom properties (design tokens) for colors, fonts, spacing, and border radius. Changes take effect after clearing Drupal's cache — no CSS rebuild needed.
 
-PalceraTheme uses [single-directory components](https://www.drupal.org/docs/develop/theming-drupal/using-single-directory-components) and comes with a variety of commonly used components. You can add new components and modify existing ones, but be sure to rebuild the CSS when you make changes.
+Key sections in `theme.css`:
+
+| Section | What it controls |
+|---------|-----------------|
+| `@theme` | Tailwind design tokens (colors, fonts, radius) |
+| `:root` | CSS custom properties for light mode |
+| `.dark` | CSS custom properties for dark mode |
+| `@font-face` | Font files and weights |
+
+### 2. Components & templates (build required)
+
+Palcera Theme uses [single-directory components](https://www.drupal.org/docs/develop/theming-drupal/using-single-directory-components). Each component lives in its own folder under `components/` with a Twig template, YAML definition, and optional JS.
+
+You can modify existing components or add new ones. Since the theme uses Tailwind, any changes to Twig templates or CSS files require a rebuild (see Building CSS below).
+
+### 3. Full theme conversion (starter kit)
+
+For deep customization, generate a starter kit copy (see "Don't sub-theme" above). This gives you full ownership of all templates, components, and build configuration.
 
 ## Building CSS
 
-PalceraTheme uses [Tailwind](https://tailwindcss.com) to simplify styling by using classes to compose designs directly in the markup.
-
-If you want to customize the Tailwind-generated CSS, install the development tooling dependencies by running the following command in your theme's directory:
+The theme uses [Tailwind CSS](https://tailwindcss.com) for utility-first styling. Install dependencies and build:
 
 ```shell
 npm install
-```
-
-If you modify CSS files or classes in a Twig template, you need to rebuild the CSS:
-
-```bash
 npm run build
 ```
 
-For development, you can watch for changes and automatically rebuild the CSS:
+For development with auto-rebuild on file changes:
 
-```bash
+```shell
 npm run dev
 ```
 
 ## Code Formatting
 
-PalceraTheme uses [Prettier](https://prettier.io) to automatically format code for consistency. The project is configured with plugins for Tailwind CSS and Twig templates.
+The theme uses [Prettier](https://prettier.io) with plugins for Tailwind CSS and Twig templates.
 
-For the best experience, [set up Prettier in your editor](https://prettier.io/docs/editors) to automatically format files on save.
-
-To format all files in the project:
-
-```bash
-npm run format
+```shell
+npm run format          # Format all files
+npm run format:check    # Check without changing
 ```
 
-To check if files are formatted correctly without making changes:
+For the best experience, [set up Prettier in your editor](https://prettier.io/docs/editors) to format on save.
 
-```bash
-npm run format:check
-```
-
-**Note**: Some files are excluded from formatting via `.prettierignore`, such as Drupal's `html.html.twig` template, which contains placeholder tokens that break Prettier's HTML parsing.
+**Note**: Some files are excluded via `.prettierignore`, such as `html.html.twig` which contains Drupal placeholder tokens that break Prettier's parser.
 
 ## Component JavaScript
 
-`lib/component.js` has two classes you can use to nicely encapsulate your component JS without pasting all the `Drupal.behaviors.componentName` boilerplate into every file. The steps are:
-
-1. Extend the `ComponentInstance` class to a new class with the code for your component.
-2. Create a new instance of the `ComponentType` class to automatically activate all the component instances on that page.
-
-For example, here's a stub of `accordion.js`:
+`lib/component.js` provides `ComponentType` and `ComponentInstance` classes that encapsulate Drupal behavior boilerplate:
 
 ```js
 import { ComponentType, ComponentInstance } from "../../lib/component.js";
 
-// Make a new class with the code for our component.
-//
-// In every method of this class, `this.el` is an HTMLElement object of
-// the component container, whose selector you provide below. You don't
-// have an array of elements that you have to `.forEach()` over yourself;
-// the ComponentType class handles all that for you.
 class Accordion extends ComponentInstance {
-  // Every subclass must have an `init` method to activate the component.
   init() {
     this.el.querySelector(".accordion--content").classList.toggle("visible");
     this.el.addClass("js");
   }
-
-  // You may also implement a `remove()` method to clean up when a component is
-  // about to be removed from the document. This will be invoked during the
-  // `detach()` method of the Drupal behavior.
-
-  // You can create as many other methods as you want; in all of them,
-  // `this.el` represents the single instance of the component. Any other
-  // properties you add to `this` will be isolated to that one instance
-  // as well.
 }
 
-// Now we instantiate ComponentType to find the component elements and run
-// our script.
-new ComponentType(
-  // First argument: The subclass of ComponentInstance we just created above.
-  Accordion,
-  // Second argument: A camel-case unique ID for the behavior (and for `once()`
-  // if applicable).
-  "accordion",
-  // Third argument: A selector for `querySelectorAll()`. All matching elements
-  // on the page get their own instance of the subclass you created, each of
-  // which has `this.el` pointing to one of those matches.
-  ".accordion",
-);
+new ComponentType(Accordion, "accordion", ".accordion");
 ```
 
-This is all the code required to be in each component. The ComponentType instance handles finding the elements, running them through `once` if available, and adding them to `Drupal.behaviors`.
+Each matching element gets its own `ComponentInstance` with `this.el` pointing to it. The `ComponentType` handles `Drupal.behaviors`, `once()`, and element discovery.
 
-All the objects created this way will be stored in a global variable so you can do stuff with them later. Since the `namespace` variable at the top of component.js is `palcera_themeComponents`, you would find the Accordion's ComponentType instance at `window.palcera_themeComponents.accordion`.
-
-Furthermore, `window.palcera_themeComponents.accordion.instances` is an array of all the ComponentInstance objects, and `window.palcera_themeComponents.accordion.elements` is an array of all the component container elements.
+Component instances are accessible at `window.palcera_themeComponents.<name>`.
 
 ## Known issues
 
-Canvas's code components are currently not compatible with Tailwind-based themes like PalceraTheme, and creating a code component will break PalceraTheme's styling. This will be fixed in [#3549628], but for now, here's how to work around it:
+### Canvas code components + Tailwind
 
-1. In Canvas's in-browser code editor, open the Global CSS tab.
-2. Paste the contents of your custom theme's `theme.css` into the code editor. It must be at the top.
-3. Paste the contents of your custom theme's `main.css` into the code editor, removing all the `@import` statements at the top first. It must come _after_ the contents of `theme.css`.
-4. Save the global CSS.
+Canvas code components are not compatible with Tailwind-based themes (including Palcera Theme). Creating a code component will break the theme styling. Workaround:
+
+1. Open Canvas's in-browser code editor, Global CSS tab.
+2. Paste `theme.css` contents at the top.
+3. Paste `main.css` contents below it (remove `@import` statements first).
+4. Save.
+
+This is tracked in the Canvas issue queue and applies to all Tailwind-based Canvas themes.
 
 ## Getting help
 
-If you have trouble or questions, please [visit the issue queue](https://www.drupal.org/project/issues/palcera_theme?categories=All) or find us on [Drupal Slack](https://www.drupal.org/community/contributor-guide/reference-information/talk/tools/slack), in the `#drupal-cms-support` channel.
-
-## Roadmap
-
-PalceraTheme is under active development. Planned improvements include more components, better customization options, and [Storybook support](https://www.drupal.org/project/palcera_theme/issues/3562711). If you want to contribute to PalceraTheme, check out the `#drupal-cms-development` channel in Drupal Slack.
+- [GitHub Issues](https://github.com/palcera/palcera_theme/issues) — bug reports and feature requests
+- [Palcera CMS](https://github.com/palcera/palcera_cms) — main project
