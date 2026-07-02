@@ -9,13 +9,13 @@ props:
       type: string
       title: Name
       examples:
-        - "Elena Martinez"
+        - "Author Name"
 
     job_title:
       type: string
       title: Job title
       examples:
-        - "Senior Partner"
+        - "Job Title"
 
     media:
       $ref: json-schema-definitions://canvas.module/image

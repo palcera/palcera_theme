@@ -86,7 +86,7 @@
   })
 %}
 
-<section class="{{ hero_classes }}">
+<section class="{{ hero_classes }}{% if background is not empty and background != 'None' %} px-6 md:px-10 xl:px-14{% endif %}">
   {% if background is not empty and background != 'None' %}
     <div class="{{ bgd_classes }}"></div>
   {% endif %}
@@ -104,7 +104,7 @@
       } only %}
     {% endblock %}
   </div>
-  <div class="flex flex-1 flex-col gap-2 md:gap-4">
+  <div class="flex flex-1 flex-col justify-center gap-2 md:gap-4">
     {% block hero_content %}
       {% block hero_slot %}
 
