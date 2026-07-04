@@ -23,7 +23,7 @@ final class RenderCallbacks implements TrustedCallbackInterface {
   public static function preRenderComponent(array $element): array {
     // In the hero-blog component, convert a UNIX timestamp into a string that
     // can be passed to strtotime() by Twig's date filter.
-    if ($element['#component'] === 'palcera_theme:hero-blog' && isset($element['#props']['date']) && is_int($element['#props']['date'])) {
+    if (isset($element['#component']) && $element['#component'] === 'palcera_theme:hero-blog' && isset($element['#props']['date']) && is_int($element['#props']['date'])) {
       $element['#props']['date'] = date('Y-m-d', $element['#props']['date']);
     }
     return $element;

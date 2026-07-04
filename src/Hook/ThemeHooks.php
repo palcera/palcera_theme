@@ -24,9 +24,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class ThemeHooks {
 
   /**
-   * The Drupal root.
+   * Per-request cache of bundle => has-full-view-content-template.
+   *
+   * @var array<string, bool>
    */
-  private static ?string $appRoot = NULL;
+  private array $canvasTemplateForBundle = [];
 
   public function __construct(
     private readonly ThemeSettingsProvider $themeSettings,
@@ -37,10 +39,8 @@ final class ThemeHooks {
     private readonly TitleResolverInterface $titleResolver,
     private readonly ChainBreadcrumbBuilderInterface $breadcrumb,
     private readonly ModuleHandlerInterface $moduleHandler,
-    #[Autowire(param: 'app.root')] string $appRoot,
-  ) {
-    self::$appRoot ??= $appRoot;
-  }
+    #[Autowire(param: 'app.root')] private readonly string $appRoot,
+  ) {}
 
   /**
    * Implements hook_element_info_alter().
@@ -63,10 +63,10 @@ final class ThemeHooks {
       NestedArray::unsetValue($libraries, $old_parents);
     };
     if ($extension === 'palcera_theme') {
-      if (file_exists(self::$appRoot . '/theme.css')) {
+      if (file_exists($this->appRoot . '/theme.css')) {
         $override('src/theme.css', '/theme.css');
       }
-      if (file_exists(self::$appRoot . '/fonts.css')) {
+      if (file_exists($this->appRoot . '/fonts.css')) {
         $override('src/fonts.css', '/fonts.css');
       }
     }
@@ -138,9 +138,12 @@ final class ThemeHooks {
     }
     elseif ($route_name === 'entity.node.canonical' && $this->moduleHandler->moduleExists('canvas')) {
       $node = $this->routeMatch->getParameter('node');
-      assert($node instanceof NodeInterface);
+      if (!$node instanceof NodeInterface) {
+        $variables['rendered_by_canvas'] = FALSE;
+        return;
+      }
 
-      $variables['rendered_by_canvas'] = (bool) $this->entityTypeManager->getStorage('content_template')
+      $variables['rendered_by_canvas'] = $this->canvasTemplateForBundle[$node->getType()] ??= (bool) $this->entityTypeManager->getStorage('content_template')
         ->getQuery()
         ->accessCheck(FALSE)
         ->count()
